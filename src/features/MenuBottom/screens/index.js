@@ -6,6 +6,8 @@ import BottomNavigation, {
   FullTab
 } from 'react-native-material-bottom-navigation';
 import DimensionUtils from '../../../utils/DimensionUtils';
+import Orders from '../../Orders/Main/'
+import MapsHome from '../../Maps/screens/MapsHome'
 
 export default class App extends React.Component {
   tabs = [
@@ -57,9 +59,15 @@ export default class App extends React.Component {
       style={{justifyContent:'center',alignItems:'center'}}
     />
   )
- 
+
   renderView(){
-    
+    if(this.state.activeTab == 'orders'){
+      return(<Orders navigation={this.props.navigation}/>)
+    }
+    if(this.state.activeTab == 'map'){
+      return(<MapsHome navigation={this.props.navigation}/>)
+    }
+    return(<Orders setTab={this.setTab.bind(this)} navigation={this.props.navigation}/>)
   }
 
   setTab(key){
@@ -71,8 +79,9 @@ export default class App extends React.Component {
       <View style={{ flex: 1,backgroundColor:'#fff' }}>
         <View style={{ flex: 1 }}>
           {/* Your screen contents depending on current tab. */}
+          {this.renderView()}
         </View>
-        <ImageBackground style={{width:'100%',paddingHorizontal:15,height:90 + DimensionUtils.safeAreaBottomHeight,justifyContent:'flex-end'}}>
+        <ImageBackground style={{width:'100%',backgroundColor:'#FFFFFF',paddingHorizontal:15,height:90 + DimensionUtils.safeAreaBottomHeight,justifyContent:'flex-end'}}>
           <BottomNavigation
             activeTab={this.state.activeTab}
             onTabPress={newTab => this.setState({ activeTab: newTab.key })}
