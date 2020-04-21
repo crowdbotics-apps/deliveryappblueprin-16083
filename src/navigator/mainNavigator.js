@@ -1,5 +1,5 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 
 import SplashScreen from "../features/SplashScreen";
@@ -11,6 +11,7 @@ import MapsNavigator from '../features/Maps/navigator';
 import CalendarNavigator from '../features/Calendar/navigator';
 import CameraNavigator from '../features/Camera/navigator';
 import EmailAuthNavigator from '../features/EmailAuth/navigator';
+import {MenuBottomNavigator} from '../features/MenuBottom/navigator';
 
 /**
  * new navigators can be imported here
@@ -18,28 +19,40 @@ import EmailAuthNavigator from '../features/EmailAuth/navigator';
 
 const AppNavigator = {
     SplashScreen: {
-      screen: SplashScreen
+        screen: SplashScreen
     },
     //@BlueprintNavigationInsertion
-Messenger: { screen: MessengerNavigator },
-Tutorial: { screen: TutorialNavigator },
-Maps: { screen: MapsNavigator },
-Calendar: { screen: CalendarNavigator },
-Camera: { screen: CameraNavigator },
-EmailAuth: { screen: EmailAuthNavigator },
+    Messenger: {
+        screen: MessengerNavigator
+    },
+    Tutorial: {
+        screen: TutorialNavigator
+    },
+    Maps: {
+        screen: MapsNavigator
+    },
+    Calendar: {
+        screen: CalendarNavigator
+    },
+    Camera: {
+        screen: CameraNavigator
+    },
+    EmailAuth: {
+        screen: EmailAuthNavigator
+    },
+    MenuBottom: {
+        screen: MenuBottomNavigator
+    },
 
     /** new navigators can be added here */
 };
 
-const DrawerAppNavigator = createDrawerNavigator(
-  {
-    ...AppNavigator,
-  },
-  {
+const DrawerAppNavigator = createDrawerNavigator({
+    ...AppNavigator
+}, {
     contentComponent: SideMenu,
-    initialRouteName: 'SplashScreen',
-  },
-);
+    initialRouteName: 'MenuBottom'
+},);
 
 const AppContainer = createAppContainer(DrawerAppNavigator);
 
