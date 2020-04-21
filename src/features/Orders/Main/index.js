@@ -152,15 +152,15 @@ class App extends Component {
 
     pendingItem(){
       return(
-        <View style={{marginBottom:15,borderRadius:20,overflow:'hidden',width:'100%',height:180,backgroundColor:'#fff'}}>
-                          <View style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center',borderBottomColor:'#A7A8AB',borderBottomWidth:2,paddingHorizontal:18,paddingVertical:15}}>
+        <View style={{marginBottom:15,borderRadius:20,overflow:'hidden',width:'100%',height:180,backgroundColor:'#fff',paddingHorizontal:18}}>
+                          <View style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center',borderBottomColor:'#A7A8AB',borderBottomWidth:2,paddingVertical:15}}>
                             <Image style={{width:40,height:40,marginEnd:15}} source={personImage}/>
                             <View>
                               <Text style={{fontSize:16,fontWeight:'bold',color:"#3B424F"}}>John Lim <Text style={{color:"#A7A8AB",fontWeight:'500'}}>#22989</Text></Text>
                               <Text  style={{fontSize:16,color:"#0A1F31"}}>09192019280</Text>
                             </View>
                           </View>
-                          <View style={{flex:1,paddingHorizontal:18,justifyContent:'center'}}>
+                          <View style={{flex:1,justifyContent:'center'}}>
                             <Text numberOfLines={2}>Voyager St. 1808  Aviation Way 670  Sweetwood Drive</Text>
                             <View style={{flexDirection:'row',alignItems:'flex-end'}}>
                               <View style={{flex:1,marginTop:8}}>

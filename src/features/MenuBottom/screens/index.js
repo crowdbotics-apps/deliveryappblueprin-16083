@@ -8,6 +8,7 @@ import BottomNavigation, {
 import DimensionUtils from '../../../utils/DimensionUtils';
 import Orders from '../../Orders/Main/'
 import MapsHome from '../../Maps/screens/MapsHome'
+import OrderHistory from '../../OrderHistory/Main/'
 
 export default class App extends React.Component {
   tabs = [
@@ -66,6 +67,9 @@ export default class App extends React.Component {
     }
     if(this.state.activeTab == 'map'){
       return(<MapsHome navigation={this.props.navigation}/>)
+    }
+    if(this.state.activeTab == 'history'){
+      return(<OrderHistory navigation={this.props.navigation}/>)
     }
     return(<Orders setTab={this.setTab.bind(this)} navigation={this.props.navigation}/>)
   }
