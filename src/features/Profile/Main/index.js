@@ -108,7 +108,7 @@ class App extends Component {
                           <View style={{marginVertical:15}}></View>
                           {this.renderOption('Clear Cache')}
                           {this.renderOption('Terms & Privacy Policy')}
-                          {this.renderOption('Contact Us')}
+                          {this.renderOption('Contact Us','ContactUs')}
                           <View style={{marginVertical:15}}></View>
                           {this.renderLogout()}
                           <View style={{marginVertical:15}}></View>
@@ -121,9 +121,9 @@ class App extends Component {
         );
     }
 
-    renderOption(label){
+    renderOption(label,screen){
       return(
-        <TouchableOpacity activeOpacity={.9} style={{width:'100%',backgroundColor:"#FFFFFF",height:68,flexDirection:'row',borderBottomColor:'#EDEDED',borderBottomWidth:1,justifyContent:'space-between',alignItems:'center',paddingHorizontal:30,paddingVertical:15}}>
+        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("ContactUs")}} activeOpacity={.9} style={{width:'100%',backgroundColor:"#FFFFFF",height:68,flexDirection:'row',borderBottomColor:'#EDEDED',borderBottomWidth:1,justifyContent:'space-between',alignItems:'center',paddingHorizontal:30,paddingVertical:15}}>
            <Text style={{fontSize:18,color:"#3B424F"}}>{label}</Text>
           <Image  source={nextImage}/>
         </TouchableOpacity>
