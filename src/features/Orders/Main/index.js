@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import {styles} from './styles'
 import headerImage from "../assets/menu_top.png"
 import personImage from "../assets/person.png"
+import icon from "../assets/icon.png"
 import {ScrollView, FlatList} from "react-native-gesture-handler";
 import Swipeable from 'react-native-swipeable-row';
 
@@ -117,13 +118,13 @@ class App extends Component {
                             </View>
                           </View>
                           <View style={{flex:1,paddingHorizontal:18,justifyContent:'center'}}>
-                            <Text numberOfLines={2}>Voyager St. 1808  Aviation Way 670  Sweetwood Drive</Text>
+                            <Text  style={{fontSize:16,color:'#3B424F',width:'100%'}} numberOfLines={2}> <Image style={{width:10,height:19,marginEnd:15}} source={icon}/> Voyager St. 1808  Aviation Way 670  Sweetwood Drive</Text>
                             <View style={{flexDirection:'row',alignItems:'flex-end'}}>
                               <View style={{flex:1,marginTop:8}}>
-                                <Text>Odered: 10:00 AM 12/21/21</Text>
-                                <Text>Cash on Delivery</Text>
+                                <Text style={{fontSize:16,color:'#3B424F',width:'100%'}}><Image style={{width:10,height:19,marginEnd:15}} source={icon}/> Ordered: 10:00 AM 12/21/21</Text>
+                                <Text  style={{fontSize:16,color:'#3B424F',width:'100%'}}><Image style={{width:10,height:19,marginEnd:15}} source={icon}/> Cash on Delivery</Text>
                               </View>
-                              <View style={{justifyContent:'center',borderRadius:5,overflow:'hidden',height:40,width:126,alignItems:'center',backgroundColor:'#FFD027'}}>
+                              <View style={{justifyContent:'center',borderRadius:5,overflow:'hidden',height:40,width:115,alignItems:'center',backgroundColor:'#FFD027'}}>
                                 <Text style={{fontSize:20,fontWeight:'bold'}}>$30.60</Text>
                               </View>
                             </View>
@@ -132,6 +133,7 @@ class App extends Component {
                         <View style={{flexDirection:'row',justifyContent:'space-between',width:'100%',flex:1,paddingHorizontal:18,borderTopColor:'#A7A8AB',borderTopWidth:2}}>
                           
                           <TouchableOpacity
+                          onPress={()=>this.props.navigation.navigate("OrderDetails")}
                           activeOpacity={.7}
                           style={[styles.buttonContainer,{backgroundColor:'#fff'}]}>
                           <Text style={[styles.buttonText,{color:"#EC5E53"}]}>VIEW DETAILS</Text>
@@ -139,6 +141,7 @@ class App extends Component {
                           </TouchableOpacity>
                         
                           <TouchableOpacity
+                          onPress={()=>this.props.navigation.navigate("OrderComplete")}
                           activeOpacity={.7}
                           style={styles.buttonContainer}>
                           <Text style={styles.buttonText}>ORDER COMPLETE</Text>
@@ -161,11 +164,11 @@ class App extends Component {
                             </View>
                           </View>
                           <View style={{flex:1,justifyContent:'center'}}>
-                            <Text numberOfLines={2}>Voyager St. 1808  Aviation Way 670  Sweetwood Drive</Text>
+                            <Text style={{fontSize:16,color:'#3B424F',width:'100%'}} numberOfLines={2}><Image style={{width:10,height:19,marginEnd:15}} source={icon}/> Voyager St. 1808  Aviation Way 670  Sweetwood Drive</Text>
                             <View style={{flexDirection:'row',alignItems:'flex-end'}}>
                               <View style={{flex:1,marginTop:8}}>
-                                <Text>Odered: 10:00 AM 12/21/21</Text>
-                                <Text>Cash on Delivery</Text>
+                                <Text style={{fontSize:16,color:'#3B424F',width:'100%'}}><Image style={{width:10,height:19,marginEnd:15}} source={icon}/> Ordered: 10:00 AM 12/21/21</Text>
+                                <Text style={{fontSize:16,color:'#3B424F',width:'100%'}}><Image style={{width:10,height:19,marginEnd:15}} source={icon}/> Cash on Delivery</Text>
                               </View>
                               <View style={{justifyContent:'center',borderRadius:5,overflow:'hidden',height:40,width:126,alignItems:'center',backgroundColor:'#FFD027'}}>
                                 <Text style={{fontSize:20,fontWeight:'bold'}}>$30.60</Text>

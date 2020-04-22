@@ -15,6 +15,7 @@ import headerImage from "../assets/menu_top.png"
 import personImage from "../assets/person.png"
 import {ScrollView, FlatList} from "react-native-gesture-handler";
 import Swipeable from 'react-native-swipeable-row';
+import icon from "../assets/icon.png"
 
 const windowWidth = Dimensions
     .get('window')
@@ -106,20 +107,17 @@ class App extends Component {
         <View style={{marginBottom:15,borderRadius:20,overflow:'hidden',width:'100%',height:180,backgroundColor:'#fff',paddingHorizontal:18}}>
                           <View style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center',borderBottomColor:'#A7A8AB',borderBottomWidth:2,paddingVertical:15}}>
                             <Image style={{width:40,height:40,marginEnd:15}} source={personImage}/>
-                            <View style={{flex:1}}>
+                            <View>
                               <Text style={{fontSize:16,fontWeight:'bold',color:"#3B424F"}}>John Lim <Text style={{color:"#A7A8AB",fontWeight:'500'}}>#22989</Text></Text>
-                              <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                                <Text  style={{fontSize:16,color:"#0A1F31"}}>09192019280</Text>
-                                <Text  style={{fontSize:16,color:"#00A807"}}>Delivered 12:29 PM</Text>
-                              </View>
+                              <Text  style={{fontSize:16,color:"#0A1F31"}}>09192019280</Text>
                             </View>
                           </View>
-                          <View style={{flex:1,paddingHorizontal:18,justifyContent:'center'}}>
-                            <Text numberOfLines={2}>Voyager St. 1808  Aviation Way 670  Sweetwood Drive</Text>
+                          <View style={{flex:1,justifyContent:'center'}}>
+                            <Text style={{fontSize:16,color:'#3B424F',width:'100%'}} numberOfLines={2}><Image style={{width:10,height:19,marginEnd:15}} source={icon}/> Voyager St. 1808  Aviation Way 670  Sweetwood Drive</Text>
                             <View style={{flexDirection:'row',alignItems:'flex-end'}}>
                               <View style={{flex:1,marginTop:8}}>
-                                <Text>Odered: 10:00 AM 12/21/21</Text>
-                                <Text>Cash on Delivery</Text>
+                                <Text style={{fontSize:16,color:'#3B424F',width:'100%'}}><Image style={{width:10,height:19,marginEnd:15}} source={icon}/> Ordered: 10:00 AM 12/21/21</Text>
+                                <Text style={{fontSize:16,color:'#3B424F',width:'100%'}}><Image style={{width:10,height:19,marginEnd:15}} source={icon}/> Cash on Delivery</Text>
                               </View>
                               <View style={{justifyContent:'center',borderRadius:5,overflow:'hidden',height:40,width:126,alignItems:'center',backgroundColor:'#FFEFB3'}}>
                                 <Text style={{fontSize:20,fontWeight:'bold'}}>$30.60</Text>

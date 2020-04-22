@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         width: '100%',
-        paddingHorizontal:scale(35)
+        paddingHorizontal:scale(15)
     },
     heading: {
         paddingTop: scaleVertical(15),
