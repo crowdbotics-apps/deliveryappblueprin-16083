@@ -93,7 +93,7 @@ class App extends Component {
                         paddingBottom: 15
                     }}>
                       <View style={{width:'100%'}}>
-                          <TouchableOpacity activeOpacity={.9} style={{width:'100%',backgroundColor:"#FFFFFF",height:115,flexDirection:'row',borderBottomColor:'#EDEDED',borderBottomWidth:1,justifyContent:'flex-start',alignItems:'center',paddingHorizontal:30,paddingVertical:15}}>
+                          <TouchableOpacity onPress={()=>{this.props.navigation.navigate("ProfileEdit")}} activeOpacity={.9} style={{width:'100%',backgroundColor:"#FFFFFF",height:115,flexDirection:'row',borderBottomColor:'#EDEDED',borderBottomWidth:1,justifyContent:'flex-start',alignItems:'center',paddingHorizontal:30,paddingVertical:15}}>
                             <Image style={{width:84,height:84,marginEnd:15}} source={personImage}/>
                             <View style={{flex:1}}>
                               <Text style={{fontSize:21,color:"#3B424F",marginBottom:10}}>John Retrick</Text>
