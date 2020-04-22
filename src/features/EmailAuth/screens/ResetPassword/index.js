@@ -8,18 +8,6 @@ import {styles} from '../styles';
 import * as emailAuthActions from '../../redux/actions';
 import ErrorBox from '../../../../components/ErrorBox';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Toast from 'react-native-simple-toast';
-import validate from 'validate.js';
-
-var constraints = {
-
-    email: {
-        presence: true,
-        email: {
-            message: 'is not valid.'
-        }
-    }
-}
 
 class PasswordRecover extends Component {
     static navigationOptions = {
@@ -61,11 +49,6 @@ class PasswordRecover extends Component {
         this.setState({email});
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        const {recoverPasswordErrors} = nextProps;
-        Toast.show(recoverPasswordErrors, Toast.LONG);
-    }
-
     renderErrors() {
         const {recoverPasswordErrors} = this.props;
         if (recoverPasswordErrors) {
@@ -74,31 +57,27 @@ class PasswordRecover extends Component {
     }
 
     submitPasswordReset() {
-        const {actions: {
-                recoverPassword
-            }} = this.props;
+        //const {actions: {
+         //       recoverPassword
+        //    }} = this.props;
 
-        const {email} = this.state;
-        let errors = validate({
-            email: email
-        }, constraints);
+        //const {email} = this.state;
 
-        if (errors) {
-            console.log(errors)
+        //recoverPassword(email);
+    }
 
-            if (errors.email) {
-                this.setState({emailError: 'Email in Empty/Invalid.'})
-                Toast.show('Email in Empty/Invalid.', Toast.LONG);
-                return false;
-            }
-            return;
-        }
+    handleNewPasswordPasswordChange(newPassword) {
+      this.setState({newPassword});
+      // todo change keyboard and add validation
+    }
 
-        recoverPassword(email);
+    handleConfirmPasswordPasswordChange(confirmPassword) {
+      this.setState({confirmPassword});
+      // todo change keyboard and add validation
     }
 
     render() {
-        const {email} = this.state;
+        const {newPassword, confirmPassword} = this.state;
 
         return (
             <View style={{
@@ -107,18 +86,31 @@ class PasswordRecover extends Component {
                 {this.renderImage()}
                 <ScrollView contentContainerStyle={styles.screen}>
                     <Text style={styles.heading} size="large">FOODIE</Text>
-                    <Text style={styles.subHead}>Forgot Password?</Text>
-                    <Text style={styles.description}>No worries, let us help you!</Text>
+                    <Text style={styles.subHead}>Reset Password?</Text>
+                    <Text style={styles.description}>Set new password for your account.</Text>
 
                     <View style={styles.fieldContainer}>
-                        <Text style={styles.label}>Email address</Text>
+                        <Text style={styles.label}>New Password</Text>
                         <Input
-                            value={email}
-                            onChangeText={this.handleEmailChange}
-                            placeholder="Email"
+                            value={newPassword}
+                            onChangeText={this.handlePasswordChange}
+                            placeholder="New Password"
                             size="small"
                             style={styles.input}
-                            keyboardType="email-address"
+                            secureTextEntry={true}
+                            textStyle={styles.text}
+                            autoCapitalize="none"/>
+                    </View>
+
+                    <View style={styles.fieldContainer}>
+                        <Text style={styles.label}>Confirm Password</Text>
+                        <Input
+                            value={confirmPassword}
+                            onChangeText={this.handleConfirmPasswordPasswordChange}
+                            placeholder="Confirm Password"
+                            size="small"
+                            style={styles.input}
+                            secureTextEntry={true}
                             textStyle={styles.text}
                             autoCapitalize="none"/>
                     </View>
@@ -127,13 +119,7 @@ class PasswordRecover extends Component {
                         CONFIRM
                     </Button>
                     <Text style={styles.signUp} onPress={() => this.props.navigation.goBack()}>
-                        <Icon
-                            size={14}
-                            style={{
-                            paddingHorizontal: 10
-                        }}
-                            name="arrow-left"
-                            color="#EC5E53"/>
+                        <Icon size={14} style={{paddingHorizontal:10}} name="arrow-left" color="#EC5E53" />
                         <Text
                             style={[
                             styles.signUp, {
@@ -142,6 +128,7 @@ class PasswordRecover extends Component {
                         ]}>
                             {"\tBack to home"}</Text>
                     </Text>
+                    {this.renderErrors()}
                 </ScrollView>
             </View>
         );

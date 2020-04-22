@@ -1,5 +1,10 @@
 import * as actions from "./constants";
 
+export const loginFB = (call) => ({
+  type: actions.FB_AUTH_LOGIN_REQUEST,
+  call: call
+});
+
 export const signUp = user => ({
   type: actions.EMAIL_AUTH_SIGNUP_REQUEST,
   user
