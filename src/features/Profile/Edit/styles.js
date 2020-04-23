@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
         height: screenSize.width / 2.6
     },
     header: {
-        height: 100,
+        height: 80,
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
