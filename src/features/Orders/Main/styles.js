@@ -46,8 +46,6 @@ export const styles = StyleSheet.create({
       flex:0.48,
       borderWidth:2,
       borderColor: "#EC5E53",
-      marginTop: scaleVertical(20),
-      marginBottom: scaleVertical(30)
   },
   buttonText: {
       fontSize: 15,

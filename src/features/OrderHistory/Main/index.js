@@ -102,6 +102,7 @@ class App extends Component {
         );
     }
 
+
     pendingItem(){
       return(
         <View style={{marginBottom:15,borderRadius:20,overflow:'hidden',width:'100%',height:180,backgroundColor:'#fff',paddingHorizontal:18}}>
@@ -113,13 +114,22 @@ class App extends Component {
                             </View>
                           </View>
                           <View style={{flex:1,justifyContent:'center'}}>
-                            <Text style={{fontSize:16,color:'#3B424F',width:'100%'}} numberOfLines={2}><Image style={{width:10,height:19,marginEnd:15}} source={icon}/> Voyager St. 1808  Aviation Way 670  Sweetwood Drive</Text>
-                            <View style={{flexDirection:'row',alignItems:'flex-end'}}>
+                          <View style={{flexDirection:'row',alignItems:'center',width:'100%'}}>
+                            <Image style={{width:10,height:19,marginEnd:15}} source={icon}/> 
+                            <Text  style={{fontSize:16,color:'#3B424F',width:'100%'}} numberOfLines={2}>Voyager St. 1808  Aviation Way 670  Sweetwood Drive</Text>
+                            </View>
+                            <View style={{flexDirection:'row',alignItems:'center'}}>
+                                  <Image style={{width:10,height:19,marginEnd:15}} source={icon}/> 
+                                  <Text style={{fontSize:16,color:'#3B424F',width:'100%'}}>Ordered: 10:00 AM 12/21/21</Text>
+                                </View>
+                            <View style={{flexDirection:'row',alignItems:'flex-start'}}>
                               <View style={{flex:1,marginTop:8}}>
-                                <Text style={{fontSize:16,color:'#3B424F',width:'100%'}}><Image style={{width:10,height:19,marginEnd:15}} source={icon}/> Ordered: 10:00 AM 12/21/21</Text>
-                                <Text style={{fontSize:16,color:'#3B424F',width:'100%'}}><Image style={{width:10,height:19,marginEnd:15}} source={icon}/> Cash on Delivery</Text>
+                                <View style={{flexDirection:'row',alignItems:'center'}}>
+                                  <Image style={{width:10,height:19,marginEnd:15}} source={icon}/> 
+                                  <Text  style={{fontSize:16,color:'#3B424F',width:'100%'}}>Cash on Delivery</Text>
+                                </View>
                               </View>
-                              <View style={{justifyContent:'center',borderRadius:5,overflow:'hidden',height:40,width:126,alignItems:'center',backgroundColor:'#FFEFB3'}}>
+                              <View style={{justifyContent:'center',borderRadius:5,overflow:'hidden',height:40,width:115,alignItems:'center',backgroundColor:'#FFEFB3'}}>
                                 <Text style={{fontSize:20,fontWeight:'bold'}}>$30.60</Text>
                               </View>
                             </View>
