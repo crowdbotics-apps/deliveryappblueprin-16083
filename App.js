@@ -4,12 +4,13 @@ import {ApplicationProvider, Layout, Text, IconRegistry} from 'react-native-ui-k
 import {Provider as ReduxProvider} from 'react-redux';
 
 import SplashScreen from './src/features/SplashScreen';
-import {store} from './src/redux/store';
+import {store, persistor} from './src/redux/store';
 import NavigatorProvider from './src/navigator/mainNavigator';
 import {setupHttpConfig} from './src/utils/http';
 import {crowdboticsTheme} from './src/config/crowdboticsTheme';
 import * as NavigationService from './src/navigator/NavigationService';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { PersistGate } from 'redux-persist/integration/react'
 
 export default class App extends React.Component {
   state = {
@@ -27,6 +28,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log("componentDidMount")
     /**
      * Read above commments above adding async requests here
      */
@@ -46,6 +48,7 @@ export default class App extends React.Component {
 
   renderApp = () => (
     <ReduxProvider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
       <IconRegistry icons={EvaIconsPack}/>
       <ApplicationProvider mapping={mapping} theme={crowdboticsTheme}>
         <NavigatorProvider
@@ -58,6 +61,7 @@ export default class App extends React.Component {
           </Layout>
         </NavigatorProvider>
       </ApplicationProvider>
+      </PersistGate>
     </ReduxProvider>
   );
 

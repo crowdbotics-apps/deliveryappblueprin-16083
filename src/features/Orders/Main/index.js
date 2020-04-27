@@ -16,7 +16,8 @@ import personImage from "../assets/person.png"
 import icon from "../assets/icon.png"
 import {ScrollView, FlatList} from "react-native-gesture-handler";
 import Swipeable from 'react-native-swipeable-row';
-
+import * as reduxActions from '../redux/actions';
+import Geolocation from '@react-native-community/geolocation';
 const windowWidth = Dimensions
     .get('window')
     .width;
@@ -42,7 +43,9 @@ class App extends Component {
             source={require('../assets/auth_bg.png')}/>);
     };
 
-    UNSAFE_componentWillMount() {}
+    UNSAFE_componentWillMount() {
+      this.getCurrentPosition()
+    }
 
     UNSAFE_componentWillReceiveProps(nextProps) {}
 
@@ -199,10 +202,25 @@ class App extends Component {
       )
     }
 
+    async getCurrentPosition(){
+      await Geolocation
+      .getCurrentPosition((geoLocation) => {
+          console.log("getCurrentPosition:: ",geoLocation);
+          this.setState({currentLat: geoLocation.coords.latitude, currentLong: geoLocation.coords.longitude, hideLocationBtn: true});
+      });
+    }
+
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({orders: state.Orders.orders});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+    actions: {
+        loadOrder: (location_latitude,location_longitude,driver_id) => {
+            dispatch(reduxActions.loadOrder(location_latitude,location_longitude,driver_id));
+        },
+        
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

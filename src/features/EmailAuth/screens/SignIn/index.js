@@ -61,8 +61,9 @@ class SignIn extends Component {
     }
 
     componentWillMount(){
+      console.log("componentWillMount:: ", this.props.accessToken)
       if(this.props.accessToken){
-        this.props.navigation.navigate("Country");
+        this.props.navigation.navigate("MenuBottom");
       }
     }
 
@@ -90,7 +91,7 @@ class SignIn extends Component {
         console.log("UNSAFE_componentWillReceiveProps:: ", nextProps)
         Toast.show(signInErrors, Toast.LONG);
         if(nextProps.accessToken){
-          this.props.navigation.navigate("Country")
+          this.props.navigation.navigate("MenuBottom");
         }
     }
 
@@ -113,8 +114,6 @@ class SignIn extends Component {
 
     submitLogin() {
 
-        this.props.navigation.navigate("MenuBottom");
-        return;
         const {actions: {
                 login
             }} = this.props;
