@@ -17,9 +17,10 @@ function getOrder({location_latitude,location_longitude,driver_id}) {
 
 function* getOrders(action) {
   setupHttpConfig();
-  console.log("getCategoryItem:: ",action)
+  console.log("getOrders:: ",action)
   try {
     const {status, data} = yield call(getOrder,{location_latitude:action.location_latitude,location_longitude:action.location_longitude,driver_id:action.driver_id});
+    console.log(data)
     if (status === 200) {
       yield put({
         type: ORDERS_UPDATE,

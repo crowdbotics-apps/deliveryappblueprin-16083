@@ -45,6 +45,7 @@ class App extends Component {
 
     UNSAFE_componentWillMount() {
       this.getCurrentPosition()
+      console.log("UNSAFE_componentWillMount:: ",this.props.user)
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {}
@@ -98,6 +99,13 @@ class App extends Component {
                         {this.inProgressItem()}
                         
                       </View>
+                      
+                      <Text style={[styles.heading,{paddingHorizontal:25,marginVertical:10,color:"#0A1F31"}]}>{"Ready To Pick"}</Text>
+                      <View style={{width:'100%'}}>
+                        {this.pendingItem()}
+                        
+                      </View>
+
                       <Text style={[styles.heading,{paddingHorizontal:25,marginVertical:10,color:"#0A1F31"}]}>{"Pending"}</Text>
                       <View style={{width:'100%'}}>
                         {this.pendingItem()}
@@ -207,12 +215,13 @@ class App extends Component {
       .getCurrentPosition((geoLocation) => {
           console.log("getCurrentPosition:: ",geoLocation);
           this.setState({currentLat: geoLocation.coords.latitude, currentLong: geoLocation.coords.longitude, hideLocationBtn: true});
+          this.props.actions.loadOrder(geoLocation.coords.latitude,geoLocation.coords.longitude,this.props.user.driver_profile.id)
       });
     }
 
 }
 
-const mapStateToProps = state => ({orders: state.Orders.orders});
+const mapStateToProps = state => ({orders: state.Orders.orders, user: state.EmailAuth.user});
 
 const mapDispatchToProps = dispatch => ({
     actions: {

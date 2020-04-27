@@ -9,11 +9,16 @@ import {
 } from "react-native";
 import {Text, Button, List, Card, Input} from "react-native-ui-kitten";
 
+import MapViewDirections from 'react-native-maps-directions';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {connect} from 'react-redux';
 import {styles} from './styles'
 import headerImage from "../assets/menu_top.png"
 import personImage from "../assets/person.png"
 import MapView, {PROVIDER_GOOGLE} from "react-native-maps";
+
+const GOOGLE_API_KEY = 'AIzaSyAFez4Yx5xX3aZoMuVghkMGlF7a6hTozMk';
+import Geolocation from '@react-native-community/geolocation';
 
 const windowWidth = Dimensions
     .get('window')
@@ -21,6 +26,9 @@ const windowWidth = Dimensions
 const windowHeight = Dimensions
     .get('window')
     .height;
+    
+const LATITUDE_DELTA = 0.005;
+const LONGITUDE_DELTA = 0.005;
 
 export default class MapsScreen extends Component {
 
@@ -47,8 +55,6 @@ export default class MapsScreen extends Component {
             style={[styles.image, imageSize]}
             source={require('../assets/auth_bg.png')}/>);
     };
-
-    UNSAFE_componentWillMount() {}
 
     UNSAFE_componentWillReceiveProps(nextProps) {}
 
@@ -89,17 +95,98 @@ export default class MapsScreen extends Component {
                     style={{
                     flex: 1,
                     width: '100%',
-                    backgroundColor:'#fff'
+                    backgroundColor: '#fff'
                 }}>
 
                     <MapView
+                    
+                    ref={ref => {
+                      this.map = ref;
+                  }}
                         provider={PROVIDER_GOOGLE}
                         style={styles.map}
-                        initialRegion={this.state.region}/>
+                        provider="google"
+                        showsUserLocation={true}
+                        showsUser={true}
+                        showsMyLocationButton={false}
+                        loadingEnabled={true}
+                        pitchEnabled={true}
+                        rotateEnabled={false}
+                        scrollEnabled={true}
+                        showsBuildings={true}
+                        showsIndoors={true}
+                        showsIndoorLevelPicker={true}
+                        showsTraffic={false}
+                        showsScale={true}
+                        zoomEnabled={true}
+                        mapType={"standard"}
+                        onMapReady={() => this.moveToCurrentRegion()}
+                        initialRegion={this.state.region}>
+                            <MapView.Marker
+                                key={1}
+                                ref={ref => {
+                                this.patientMarker = ref;
+                                if (this.patientMarker) {
+                                    this
+                                        .patientMarker
+                                        .showCallout();
+                                }
+                            }}
+                                title={'Your Location'}
+                                pinColor={'red'}
+                                coordinate={this.state.region}>
+
+                            </MapView.Marker>
+                            <MapViewDirections
+                                origin={this.state.currentPosition}
+                                strokeWidth={3}
+                                optimizeWaypoints={true}
+                                strokeColor="hotpink"
+                                destination={this.state.region}
+                                apikey={GOOGLE_API_KEY}/>
+                          </MapView>
 
                 </View>
+
+                <TouchableOpacity
+                    activeOpacity={0.6}
+                    style={{
+                    alignSelf: 'flex-end',
+                    position: 'absolute',
+                    bottom: 20,
+                    right: 20
+                }}
+                    onPress={() => this.moveToCurrentRegion()}
+                    underlayColor='transparent'>
+                    <View style={[styles.menuCircle]}>
+
+                        <Icon name={"crosshairs"} size={30} color={"#808080"}/>
+                    </View>
+                </TouchableOpacity>
 
             </View>
         );
     }
+
+    async moveToCurrentRegion() {
+      this.setState({searchName: null});
+      await Geolocation
+          .getCurrentPosition((geoLocation) => {
+              this.setState({currentPosition: {
+                latitude: geoLocation.coords.latitude,
+                longitude: geoLocation.coords.longitude,
+                latitudeDelta: LATITUDE_DELTA,
+                longitudeDelta: LONGITUDE_DELTA
+            }});
+              
+              this
+                  .map
+                  .animateToRegion({
+                      latitude: geoLocation.coords.latitude,
+                      longitude: geoLocation.coords.longitude,
+                      latitudeDelta: LATITUDE_DELTA,
+                      longitudeDelta: LONGITUDE_DELTA
+                  }, 2000);
+          });
+  }
 }

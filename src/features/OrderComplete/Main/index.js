@@ -161,10 +161,9 @@ class App extends Component {
                         </View>
 
                         <View style={styles.okayContainer}>
-                            <Text category="h4" style={styles.okayText}>Give your okay a review.</Text>
                             <TouchableOpacity
                                 onPress={() => {
-                                  this.props.navigation.navigate("Feedback");
+                                  this.props.navigation.navigate("Home");
                                 }}
                                 activeOpacity={.7}
                                 style={styles.buttonContainer}>
