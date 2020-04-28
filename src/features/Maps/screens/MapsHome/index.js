@@ -26,11 +26,11 @@ const windowWidth = Dimensions
 const windowHeight = Dimensions
     .get('window')
     .height;
-    
+
 const LATITUDE_DELTA = 0.005;
 const LONGITUDE_DELTA = 0.005;
 
-export default class MapsScreen extends Component {
+class MapsScreen extends Component {
 
     constructor(props) {
         super(props);
@@ -99,10 +99,9 @@ export default class MapsScreen extends Component {
                 }}>
 
                     <MapView
-                    
-                    ref={ref => {
-                      this.map = ref;
-                  }}
+                        ref={ref => {
+                        this.map = ref;
+                    }}
                         provider={PROVIDER_GOOGLE}
                         style={styles.map}
                         provider="google"
@@ -122,29 +121,33 @@ export default class MapsScreen extends Component {
                         mapType={"standard"}
                         onMapReady={() => this.moveToCurrentRegion()}
                         initialRegion={this.state.region}>
-                            <MapView.Marker
-                                key={1}
-                                ref={ref => {
-                                this.patientMarker = ref;
-                                if (this.patientMarker) {
-                                    this
-                                        .patientMarker
-                                        .showCallout();
-                                }
-                            }}
-                                title={'Your Location'}
-                                pinColor={'red'}
-                                coordinate={this.state.region}>
-
-                            </MapView.Marker>
-                            <MapViewDirections
-                                origin={this.state.currentPosition}
-                                strokeWidth={3}
-                                optimizeWaypoints={true}
-                                strokeColor="hotpink"
-                                destination={this.state.region}
-                                apikey={GOOGLE_API_KEY}/>
-                          </MapView>
+                        <MapView.Marker
+                            key={1}
+                            ref={ref => {
+                            this.patientMarker = ref;
+                            if (this.patientMarker) {
+                                this
+                                    .patientMarker
+                                    .showCallout();
+                            }
+                        }}
+                            title={'Your Location'}
+                            pinColor={'red'}
+                            coordinate={this.state.region}></MapView.Marker>
+                        {this.props.orders.length > 0 && <MapViewDirections
+                            origin={this.state.currentPosition}
+                            strokeWidth={3}
+                            optimizeWaypoints={true}
+                            strokeColor="hotpink"
+                            destination={{
+                            latitude: Number(this.props.orders[0].location_latitude),
+                            longitude: Number(this.props.orders[0].location_longitude),
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421
+                        }}
+                            apikey={GOOGLE_API_KEY}/>
+                        }
+                    </MapView>
 
                 </View>
 
@@ -169,24 +172,31 @@ export default class MapsScreen extends Component {
     }
 
     async moveToCurrentRegion() {
-      this.setState({searchName: null});
-      await Geolocation
-          .getCurrentPosition((geoLocation) => {
-              this.setState({currentPosition: {
-                latitude: geoLocation.coords.latitude,
-                longitude: geoLocation.coords.longitude,
-                latitudeDelta: LATITUDE_DELTA,
-                longitudeDelta: LONGITUDE_DELTA
-            }});
-              
-              this
-                  .map
-                  .animateToRegion({
-                      latitude: geoLocation.coords.latitude,
-                      longitude: geoLocation.coords.longitude,
-                      latitudeDelta: LATITUDE_DELTA,
-                      longitudeDelta: LONGITUDE_DELTA
-                  }, 2000);
-          });
-  }
+        this.setState({searchName: null});
+        await Geolocation.getCurrentPosition((geoLocation) => {
+            this.setState({
+                currentPosition: {
+                    latitude: geoLocation.coords.latitude,
+                    longitude: geoLocation.coords.longitude,
+                    latitudeDelta: LATITUDE_DELTA,
+                    longitudeDelta: LONGITUDE_DELTA
+                }
+            });
+
+            this
+                .map
+                .animateToRegion({
+                    latitude: geoLocation.coords.latitude,
+                    longitude: geoLocation.coords.longitude,
+                    latitudeDelta: LATITUDE_DELTA,
+                    longitudeDelta: LONGITUDE_DELTA
+                }, 2000);
+        });
+    }
 }
+
+const mapStateToProps = state => ({orders: state.Orders.orders, user: state.EmailAuth.user});
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapsScreen);
