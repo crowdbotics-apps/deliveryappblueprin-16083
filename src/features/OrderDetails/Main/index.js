@@ -117,7 +117,6 @@ class App extends Component {
                             .state
                             .cart
                             .map((order, key) => {
-                                console.log(order.item.image)
                                 return (this.orderItems({
                                     fullItem: order,
                                     name: order.item.name,
@@ -136,7 +135,7 @@ class App extends Component {
 
                         <View style={styles.okayContainer}>
                             <TouchableOpacity
-                                onPress={()=>this.props.navigation.navigate("OrderComplete")}
+                                onPress={()=>this.props.navigation.navigate("OrderComplete",{item:this.state.item})}
                                 activeOpacity={.7}
                                 style={styles.buttonContainer}>
                                 <Text style={styles.buttonText}>ORDER COMPLETE</Text>
