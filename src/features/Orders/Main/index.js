@@ -99,13 +99,7 @@ class App extends Component {
                         {
                           this.props.orders.map((item) => {
                             if(item.status == 'processing'){
-                            return(this.inProgressItem({
-                              id: item.id,
-                              first_name: item.first_name,
-                              phone: item.phone,
-                              address: item.address,
-                              total_amount: item.total_amount
-                            }))
+                            return(this.inProgressItem(item))
                             }
                           })
                         }
@@ -190,7 +184,7 @@ class App extends Component {
                         <View style={{flexDirection:'row',height:60,justifyContent:'space-between',alignItems:'center',width:'100%',flex:1,paddingHorizontal:18,borderTopColor:'#A7A8AB',borderTopWidth:2}}>
                           
                           <TouchableOpacity
-                          onPress={()=>this.props.navigation.navigate("OrderDetails")}
+                          onPress={()=>this.props.navigation.navigate("OrderDetails",{ item })}
                           activeOpacity={.7}
                           style={[styles.buttonContainer,{backgroundColor:'#fff'}]}>
                           <Text style={[styles.buttonText,{color:"#EC5E53"}]}>VIEW DETAILS</Text>
@@ -198,7 +192,7 @@ class App extends Component {
                           </TouchableOpacity>
                         
                           <TouchableOpacity
-                          onPress={()=>this.props.navigation.navigate("OrderComplete")}
+                          onPress={()=>this.props.navigation.navigate("OrderComplete",{ item})}
                           activeOpacity={.7}
                           style={styles.buttonContainer}>
                           <Text style={styles.buttonText}>ORDER COMPLETE</Text>

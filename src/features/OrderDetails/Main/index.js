@@ -26,8 +26,9 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          cart:[],
-          total:"30",
+          cart:this.props.navigation.state.params.item.order,
+          total:this.props.navigation.state.params.item.total_amount,
+          item:this.props.navigation.state.params.item,
           checkOutDate:"16 Nov 2017 at 7:15 PM"
         }
     }
@@ -115,45 +116,18 @@ class App extends Component {
                         {this
                             .state
                             .cart
-                            .map((item, key) => {
+                            .map((order, key) => {
+                                console.log(order.item.image)
                                 return (this.orderItems({
-                                    fullItem: item,
-                                    name: item.name,
+                                    fullItem: order,
+                                    name: order.item.name,
                                     count: 1,
                                     notes: "Extra Cheese",
                                     size: "X 2",
-                                    price: item.price,
-                                    image: item.image
+                                    price: order.price,
+                                    image: order.item.image
                                 }));
                             })}
-                            {this.dummyOrderItems({
-                                    fullItem: {},
-                                    name: 'Chicken Supreme (L)',
-                                    count: 1,
-                                    notes: "Extra Cheese",
-                                    size: "X 2",
-                                    price: '20.34',
-                                    image: require('../assets/pizza.png')
-                                })}
-                                
-                            {this.dummyOrderItems({
-                                    fullItem: {},
-                                    name: 'Soda',
-                                    count: 1,
-                                    notes: "Zero Coke",
-                                    size: "X 2",
-                                    price: '1.12',
-                                    image: require('../assets/soda.png')
-                                })}
-                                {this.dummyOrderItems({
-                                    fullItem: {},
-                                    name: 'Seafood Pasta (L)',
-                                    count: 1,
-                                    notes: "No chilly pepper, for children",
-                                    size: "X 1",
-                                    price: '8.70',
-                                    image: require('../assets/sea_food.png')
-                                })}
                         </View>
                         <View style={styles.totalContainer}>
                             <Text category="h4" style={styles.totalText}>Total</Text>
