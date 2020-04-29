@@ -5,3 +5,7 @@ export const loadOrder = (location_latitude,location_longitude,driver_id) => ({
   location_latitude,location_longitude,driver_id
 });
 
+export const deliveredOrder = (data) => ({
+  type: actions.ORDERS_DELIVERED_REQUEST,
+  data
+});

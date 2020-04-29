@@ -14,6 +14,7 @@ import {styles} from './styles'
 import headerImage from "../assets/top_bg.png"
 import {ScrollView, FlatList} from "react-native-gesture-handler";
 import {connect} from 'react-redux';
+import * as reduxActions from '../../Orders/redux/actions';
 
 const windowWidth = Dimensions
     .get('window')
@@ -87,6 +88,13 @@ class App extends Component {
     UNSAFE_componentWillMount() {
     }
 
+    UNSAFE_componentWillReceiveProps(nextProps){
+      console.log("UNSAFE_componentWillReceiveProps:: ",nextProps.responseDelivered);
+      if(nextProps.responseDelivered && nextProps.responseDelivered.success){
+        this.props.navigation.navigate("Home");
+      }
+    }
+
     setTotal(cart) {
       total = 0;
       console.log("setTotal:: ", cart);
@@ -137,7 +145,7 @@ class App extends Component {
                         <View style={styles.okayContainer}>
                             <TouchableOpacity
                                 onPress={() => {
-                                  this.props.navigation.navigate("Home");
+                                  this.props.actions.deliveredOrder({bill_id:this.state.item.id})
                                 }}
                                 activeOpacity={.7}
                                 style={styles.buttonContainer}>
@@ -189,9 +197,16 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => ({actions: {
-}});
+const mapStateToProps = state => ({responseDelivered: state.Orders.responseDelivered});
+
+const mapDispatchToProps = dispatch => ({
+  actions: {
+      deliveredOrder: (data) => {
+          dispatch(reduxActions.deliveredOrder(data));
+      },
+  }
+});
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -91,8 +91,19 @@ class App extends Component {
                         paddingBottom: 15
                     }}>
                       <View style={{width:'100%'}}>
-                        {this.pendingItem()}
-                        {this.pendingItem()}
+                        {
+                          this.props.orders.map((item) => {
+                            if(item.status == 'delivered'){
+                            return(this.pendingItem({
+                              id: item.id,
+                              first_name: item.first_name,
+                              phone: item.phone,
+                              address: item.address,
+                              total_amount: item.total_amount
+                            }))
+                            }
+                          })
+                        }
                         
                       </View>
                     </ScrollView>
@@ -102,21 +113,20 @@ class App extends Component {
         );
     }
 
-
-    pendingItem(){
+    pendingItem(item){
       return(
         <View style={{marginBottom:15,borderRadius:20,overflow:'hidden',width:'100%',height:180,backgroundColor:'#fff',paddingHorizontal:18}}>
                           <View style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center',borderBottomColor:'#A7A8AB',borderBottomWidth:2,paddingVertical:15}}>
                             <Image style={{width:40,height:40,marginEnd:15}} source={personImage}/>
                             <View>
-                              <Text style={{fontSize:16,fontWeight:'bold',color:"#3B424F"}}>John Lim <Text style={{color:"#A7A8AB",fontWeight:'500'}}>#22989</Text></Text>
-                              <Text  style={{fontSize:16,color:"#0A1F31"}}>09192019280</Text>
+                              <Text style={{fontSize:16,fontWeight:'bold',color:"#3B424F"}}>{item.first_name} <Text style={{color:"#A7A8AB",fontWeight:'500'}}>#{item.id}</Text></Text>
+                              <Text  style={{fontSize:16,color:"#0A1F31"}}>{item.phone}</Text>
                             </View>
                           </View>
                           <View style={{flex:1,justifyContent:'center'}}>
                           <View style={{flexDirection:'row',alignItems:'center',width:'100%'}}>
                             <Image style={{width:10,height:19,marginEnd:15}} source={icon}/> 
-                            <Text  style={{fontSize:16,color:'#3B424F',width:'100%'}} numberOfLines={2}>Voyager St. 1808  Aviation Way 670  Sweetwood Drive</Text>
+                            <Text  style={{fontSize:16,color:'#3B424F',width:'100%'}} numberOfLines={2}>{item.address}</Text>
                             </View>
                             <View style={{flexDirection:'row',alignItems:'center'}}>
                                   <Image style={{width:10,height:19,marginEnd:15}} source={icon}/> 
@@ -130,7 +140,43 @@ class App extends Component {
                                 </View>
                               </View>
                               <View style={{justifyContent:'center',borderRadius:5,overflow:'hidden',height:40,width:115,alignItems:'center',backgroundColor:'#FFEFB3'}}>
-                                <Text style={{fontSize:20,fontWeight:'bold'}}>$30.60</Text>
+                                <Text style={{fontSize:20,fontWeight:'bold'}}>${item.total_amount}</Text>
+                              </View>
+                            </View>
+                          </View>
+
+                        </View>
+      )
+    }
+
+    pendingItemDummy(){
+      return(
+        <View style={{marginBottom:15,borderRadius:20,overflow:'hidden',width:'100%',height:180,backgroundColor:'#fff',paddingHorizontal:18}}>
+                          <View style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center',borderBottomColor:'#A7A8AB',borderBottomWidth:2,paddingVertical:15}}>
+                            <Image style={{width:40,height:40,marginEnd:15}} source={personImage}/>
+                            <View>
+                              <Text style={{fontSize:16,fontWeight:'bold',color:"#3B424F"}}>John Lim <Text style={{color:"#A7A8AB",fontWeight:'500'}}>#22989</Text></Text>
+                              <Text  style={{fontSize:16,color:"#0A1F31"}}>09192019280</Text>
+                            </View>
+                          </View>
+                          <View style={{flex:1,justifyContent:'center'}}>
+                          <View style={{flexDirection:'row',alignItems:'center',width:'100%'}}>
+                            <Image style={{width:10,height:19,marginEnd:15}} source={icon}/> 
+                            <Text  style={{fontSize:16,color:'#3B424F',width:'100%'}} numberOfLines={2}>{item.address}</Text>
+                            </View>
+                            <View style={{flexDirection:'row',alignItems:'center'}}>
+                                  <Image style={{width:10,height:19,marginEnd:15}} source={icon}/> 
+                                  <Text style={{fontSize:16,color:'#3B424F',width:'100%'}}>Ordered: 10:00 AM 12/21/21</Text>
+                                </View>
+                            <View style={{flexDirection:'row',alignItems:'flex-start'}}>
+                              <View style={{flex:1,marginTop:8}}>
+                                <View style={{flexDirection:'row',alignItems:'center'}}>
+                                  <Image style={{width:10,height:19,marginEnd:15}} source={icon}/> 
+                                  <Text  style={{fontSize:16,color:'#3B424F',width:'100%'}}>Cash on Delivery</Text>
+                                </View>
+                              </View>
+                              <View style={{justifyContent:'center',borderRadius:5,overflow:'hidden',height:40,width:115,alignItems:'center',backgroundColor:'#FFEFB3'}}>
+                                <Text style={{fontSize:20,fontWeight:'bold'}}>${item.total_amount}</Text>
                               </View>
                             </View>
                           </View>
@@ -141,8 +187,10 @@ class App extends Component {
 
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({orders: state.Orders.orders, user: state.EmailAuth.user});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
