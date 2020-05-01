@@ -101,7 +101,7 @@ class App extends Component {
                         flex: 1,
                         paddingBottom: 15
                     }}>
-                      <Text style={[styles.heading,{paddingHorizontal:25,marginVertical:10}]}>{"In Progress"}</Text>
+                      <Text style={[styles.heading,{paddingHorizontal:25,marginBottom:30,marginVertical:10}]}>{"In Progress"}</Text>
                       <View style={{width:'100%'}}>
                         {
                           this.props.orders.map((item) => {
@@ -113,7 +113,9 @@ class App extends Component {
                         
                       </View>
                       
-                      <Text style={[styles.heading,{paddingHorizontal:25,marginVertical:10,color:"#0A1F31"}]}>{"Ready To Pick"}</Text>
+                      <View style={{backgroundColor:"#fff",height:50,marginBottom:30,justifyContent:'center'}}>
+                        <Text style={[styles.heading,{paddingHorizontal:25,marginVertical:10,color:"#0A1F31"}]}>{"Ready To Pick"}</Text>
+                      </View>
                       <View style={{width:'100%'}}>
                         {
                           this.props.orders.map((item) => {
@@ -131,7 +133,9 @@ class App extends Component {
                         
                       </View>
 
-                      <Text style={[styles.heading,{paddingHorizontal:25,marginVertical:10,color:"#0A1F31"}]}>{"Pending"}</Text>
+                      <View style={{backgroundColor:"#fff",height:50,marginBottom:30,justifyContent:'center'}}>
+                        <Text style={[styles.heading,{paddingHorizontal:25,marginVertical:10,color:"#0A1F31"}]}>{"Pending"}</Text>
+                      </View>
                       <View style={{width:'100%'}}>
                         {
                           this.props.orders.map((item) => {
