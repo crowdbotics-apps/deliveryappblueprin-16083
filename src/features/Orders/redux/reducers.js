@@ -1,7 +1,7 @@
 import * as actions from "./constants";
 
 const initialState = {
-    orders: null,
+    orders: [],
     selectedOrder: null,
     successDelivered:null,
     responseDelivered:null

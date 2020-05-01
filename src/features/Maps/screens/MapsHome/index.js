@@ -40,9 +40,21 @@ class MapsScreen extends Component {
                 latitude: 37.78825,
                 longitude: -122.4324,
                 latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421
+                longitudeDelta: 0.0421,
+                
+                destinationLatitude: !this.props.orders[0] ? 37.4219983333333346 : Number(this.props.orders[0].location_latitude),
+                destinationLongitude: !this.props.orders[0] ? 37.4219983333333346 : Number(this.props.orders[0].location_longitude),
             }
         }
+    }
+
+    UNSAFE_componentWillMount(){
+      if(this.props.orders.length > 0){
+        console.log("MapsHome UNSAFE_componentWillMount:",this.props.orders[0])
+        console.log("MapsHome UNSAFE_componentWillMount:",Number(this.props.orders[0].location_latitude))
+        console.log("MapsHome UNSAFE_componentWillMount:",Number(this.props.orders[0].location_longitude))
+        //this.setState({destinationLatitude: Number(this.props.orders[0].location_latitude),destinationLongitude: Number(this.props.orders[0].location_longitude)});
+      }
     }
 
     renderImage = () => {
@@ -134,14 +146,14 @@ class MapsScreen extends Component {
                             title={'Your Location'}
                             pinColor={'red'}
                             coordinate={this.state.region}></MapView.Marker>
-                        {this.props.orders.length > 0 && <MapViewDirections
+                        {<MapViewDirections
                             origin={this.state.currentPosition}
                             strokeWidth={3}
                             optimizeWaypoints={true}
                             strokeColor="hotpink"
                             destination={{
-                            latitude: Number(this.props.orders[0].location_latitude),
-                            longitude: Number(this.props.orders[0].location_longitude),
+                            latitude: Number(this.state.destinationLatitude),
+                            longitude: Number(this.state.destinationLongitude),
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421
                         }}

@@ -5,7 +5,8 @@ import {
     View,
     TouchableOpacity,
     Dimensions,
-    ImageBackground
+    ImageBackground,
+    RefreshControl
 } from "react-native";
 import {Text, Button, List, Card, CardHeader} from "react-native-ui-kitten";
 
@@ -29,7 +30,9 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+          refreshing:false
+        }
     }
 
     renderImage = () => {
@@ -44,6 +47,7 @@ class App extends Component {
     };
 
     UNSAFE_componentWillMount() {
+      
       this.getCurrentPosition()
       console.log("UNSAFE_componentWillMount:: ",this.props.user)
     }
@@ -89,6 +93,9 @@ class App extends Component {
                     width: '100%'
                 }}>
                     <ScrollView
+                        refreshControl={
+                          <RefreshControl refreshing={this.state.refreshing} onRefresh={()=>{this.getCurrentPosition()}} />
+                        }
                         showsVerticalScrollIndicator={false}
                         style={{
                         flex: 1,
