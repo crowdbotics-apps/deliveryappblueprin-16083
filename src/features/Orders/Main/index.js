@@ -113,7 +113,7 @@ class App extends Component {
                         
                       </View>
                       
-                      <View style={{backgroundColor:"#fff",height:50,marginBottom:30,justifyContent:'center'}}>
+                      <View style={{backgroundColor:"#fff",height:70,marginBottom:30,justifyContent:'center'}}>
                         <Text style={[styles.heading,{paddingHorizontal:25,marginVertical:10,color:"#0A1F31"}]}>{"Ready To Pick"}</Text>
                       </View>
                       <View style={{width:'100%'}}>
@@ -133,7 +133,7 @@ class App extends Component {
                         
                       </View>
 
-                      <View style={{backgroundColor:"#fff",height:50,marginBottom:30,justifyContent:'center'}}>
+                      <View style={{backgroundColor:"#fff",height:70,marginBottom:30,justifyContent:'center'}}>
                         <Text style={[styles.heading,{paddingHorizontal:25,marginVertical:10,color:"#0A1F31"}]}>{"Pending"}</Text>
                       </View>
                       <View style={{width:'100%'}}>

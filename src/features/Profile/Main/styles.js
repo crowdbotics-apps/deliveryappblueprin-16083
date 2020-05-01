@@ -5,6 +5,13 @@ const screenSize = Dimensions.get('window');
 import {scaleVertical, scale} from "../../../utils/scale";
 import DimensionUtils from '../../../utils/DimensionUtils';
 
+const windowWidth = Dimensions
+    .get('window')
+    .width;
+const windowHeight = Dimensions
+    .get('window')
+    .height;
+    
 export const styles = StyleSheet.create({
     itemsContainer: {
         justifyContent: 'flex-start',
@@ -12,6 +19,15 @@ export const styles = StyleSheet.create({
         backgroundColor: "#F7F7F7",
         flex: 1,
         paddingTop: DimensionUtils.safeAreaTopHeight
+    },
+    styleBg:{
+        marginTop: 0,
+        width: windowWidth *1.3,
+        height: (windowHeight * .5),
+        justifyContent: 'center',
+        position: 'absolute',
+        height:100 + DimensionUtils.safeAreaTopHeight,
+        backgroundColor:"#0A1F31"
     },
     image: {
         resizeMode: "cover",
@@ -25,7 +41,7 @@ export const styles = StyleSheet.create({
         height: screenSize.width / 2.6
     },
     header: {
-        height: 100,
+        height: 100 + DimensionUtils.safeAreaTopHeight,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',

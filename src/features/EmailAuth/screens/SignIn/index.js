@@ -145,7 +145,7 @@ class SignIn extends Component {
         // todo add disable buttons on submit
         login({email: email, password});
 
-        this.setState({email: '', password: ''});
+        //this.setState({email: '', password: ''});
     }
 
     goToPasswordRecover() {

@@ -69,15 +69,7 @@ class App extends Component {
                 {this.renderImage()}
                 <View
                     resizeMode={"contain"}
-                    style={{
-                    marginTop: 0,
-                    width: windowWidth *1.3,
-                    height: (windowHeight * .5),
-                    justifyContent: 'center',
-                    position: 'absolute',
-                    height:100,
-                    backgroundColor:"#0A1F31"
-                }}></View>
+                    style={styles.styleBg}></View>
 
                 {this.header()}
 

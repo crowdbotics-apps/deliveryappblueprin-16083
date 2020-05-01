@@ -1,6 +1,12 @@
 import {StyleSheet, Dimensions} from 'react-native'
 
 const screenSize = Dimensions.get('window');
+const windowWidth = Dimensions
+    .get('window')
+    .width;
+const windowHeight = Dimensions
+    .get('window')
+    .height;
 
 import {scaleVertical, scale} from "../../../utils/scale";
 import DimensionUtils from '../../../utils/DimensionUtils';
@@ -20,12 +26,21 @@ export const styles = StyleSheet.create({
         top: 0
     },
 
+    styleBg:{
+        marginTop: 0,
+        width: windowWidth *1.3,
+        height: (windowHeight * .5),
+        justifyContent: 'center',
+        position: 'absolute',
+        height:100 + DimensionUtils.safeAreaTopHeight,
+        backgroundColor:"#0A1F31"
+    },
     imageBg: {
         width: '100%',
         height: screenSize.width / 2.6
     },
     header: {
-        height: 80,
+        height: DimensionUtils.safeAreaTopHeight+80,
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
